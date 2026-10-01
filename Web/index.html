@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bế Quan Đột Phá</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            giay: '#EADFC4',      // giấy tuyên (nền trang)
+            panel: '#F6EFD9',     // vàng nhạt (khung chính)
+            muc: '#2E2619',       // mực
+            'muc-nhat': '#6B5D44',
+            dong: '#B38B2D',      // vàng đồng (thanh tu vi)
+            ngoc: '#3F6B5A',      // ngọc bích (thành công)
+            chusa: '#8C2F2B',     // chu sa (thất bại)
+            vien: '#CDBB8C'       // viền
+          },
+          fontFamily: { serif: ['"Noto Serif"', 'Georgia', 'serif'] }
+        }
+      }
+    };
+  </script>
+  <style>
+    .bar-fill { transition: width .5s ease; }
+    .toast { transition: opacity .25s ease, transform .25s ease; }
+    @media (prefers-reduced-motion: reduce) { .bar-fill, .toast { transition: none; } }
+  </style>
+</head>
+<body class="min-h-screen bg-giay text-muc font-serif antialiased flex items-center justify-center p-5">
+
+  <div id="toasts" class="fixed inset-x-0 top-4 z-50 flex flex-col items-center gap-2 px-4 pointer-events-none" aria-live="polite"></div>
+
+  <main class="w-full max-w-lg bg-panel border border-vien outline outline-1 outline-offset-4 outline-vien p-6 sm:p-8">
+    <p class="text-sm text-muc-nhat">Cảnh giới hiện tại</p>
+    <h1 id="realm-name" class="mt-1 text-3xl sm:text-4xl font-bold leading-tight text-balance">Đang tải…</h1>
+
+    <section class="mt-8">
+      <div class="flex items-baseline justify-between gap-4">
+        <span class="font-semibold">Tu vi</span>
+        <span id="exp-text" class="text-sm tabular-nums text-muc-nhat">0 / 0</span>
+      </div>
+      <div id="exp-track" class="mt-2 h-3 bg-[#DCCFA8] border border-vien" role="progressbar"
+           aria-label="Tiến trình tu vi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="exp-fill" class="bar-fill h-full bg-dong" style="width: 0%"></div>
+      </div>
+      <p id="exp-hint" class="mt-2 text-sm leading-relaxed text-muc-nhat"></p>
+    </section>
+
+    <section class="mt-6 flex items-baseline justify-between gap-4 border-t border-vien pt-4">
+      <span class="font-semibold">Tỷ lệ đột phá thành công</span>
+      <span id="rate" class="text-2xl font-bold tabular-nums">–</span>
+    </section>
+
+    <div class="mt-8 grid gap-3 sm:grid-cols-2">
+      <button id="btn-train" type="button"
+        class="px-4 py-3 rounded-sm border border-muc font-semibold hover:bg-giay disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ngoc">
+        Bế Quan Tu Luyện
+      </button>
+      <button id="btn-break" type="button"
+        class="px-4 py-3 rounded-sm border border-muc bg-muc text-panel font-semibold hover:bg-ngoc hover:border-ngoc disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ngoc">
+        Đột Phá
+      </button>
+    </div>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const fmt = new Intl.NumberFormat('vi-VN');
+    let busy = false;
+    let hasNext = true;
+
+    // ---- Toast -----------------------------------------------------------
+    function showToast(message, type = 'info') {
+      const styles = {
+        success: 'bg-ngoc text-panel',
+        fail: 'bg-chusa text-panel',
+        info: 'bg-muc text-panel'
+      };
+      const el = document.createElement('div');
+      el.className = `toast pointer-events-auto max-w-md px-4 py-3 text-sm rounded-sm opacity-0 -translate-y-2 ${styles[type] || styles.info}`;
+      el.setAttribute('role', 'status');
+      el.textContent = message;
+      $('toasts').appendChild(el);
+
+      requestAnimationFrame(() => el.classList.remove('opacity-0', '-translate-y-2'));
+      setTimeout(() => {
+        el.classList.add('opacity-0', '-translate-y-2');
+        setTimeout(() => el.remove(), 300);
+      }, 3800);
+    }
+
+    // ---- API -------------------------------------------------------------
+    async function api(path, method = 'GET') {
+      const res = await fetch(path, { method });
+      let data = {};
+      try { data = await res.json(); } catch (_) { /* phản hồi không phải JSON */ }
+      if (!res.ok) throw new Error(data.detail || `Lỗi máy chủ (${res.status})`);
+      return data;
+    }
+
+    // ---- Giao diện ---------------------------------------------------------
+    function syncButtons() {
+      $('btn-train').disabled = busy;
+      $('btn-break').disabled = busy || !hasNext;
+    }
+
+    function render({ player, current_realm: cur, next_realm: next }) {
+      $('realm-name').textContent = cur.name;
+      hasNext = Boolean(next);
+
+      let pct = 100;
+      if (next) {
+        pct = Math.min(100, (player.exp / next.required_exp) * 100);
+        const missing = next.required_exp - player.exp;
+        $('exp-text').textContent = `${fmt.format(player.exp)} / ${fmt.format(next.required_exp)}`;
+        $('exp-hint').textContent = missing > 0
+          ? `Cần thêm ${fmt.format(missing)} tu vi để đột phá lên ${next.name}.`
+          : `Đã đủ tu vi để đột phá lên ${next.name}.`;
+        $('rate').textContent = `${(next.success_rate * 100).toFixed(1)}%`;
+      } else {
+        $('exp-text').textContent = `${fmt.format(player.exp)} / –`;
+        $('exp-hint').textContent = 'Bạn đã đạt cảnh giới cao nhất.';
+        $('rate').textContent = '–';
+      }
+
+      $('exp-fill').style.width = `${pct}%`;
+      $('exp-track').setAttribute('aria-valuenow', Math.round(pct));
+      syncButtons();
+    }
+
+    async function run(path, method, onDone) {
+      if (busy) return;
+      busy = true;
+      syncButtons();
+      try {
+        const data = await api(path, method);
+        render(data);
+        if (onDone) onDone(data);
+      } catch (err) {
+        const msg = err instanceof TypeError ? 'Không kết nối được máy chủ.' : err.message;
+        showToast(msg, 'info');
+      } finally {
+        busy = false;
+        syncButtons();
+      }
+    }
+
+    $('btn-train').addEventListener('click', () =>
+      run('/api/tu-luyen', 'POST', (d) => showToast(d.message, 'info')));
+
+    $('btn-break').addEventListener('click', () =>
+      run('/api/dot-pha', 'POST', (d) => showToast(d.message, d.success ? 'success' : 'fail')));
+
+    run('/api/player', 'GET');
+  </script>
+</body>
+</html>
