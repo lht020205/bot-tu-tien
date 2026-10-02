@@ -2,25 +2,18 @@
 """
 canh_gioi_phap_bao.py
 =====================
-Lưu trữ toàn bộ danh sách cảnh giới pháp bảo trong hệ thống.
+Lưu trữ danh sách 5 cảnh giới pháp bảo trong hệ thống.
 File này thuần túy lưu trữ dữ liệu cảnh giới và các hàm tra cứu cơ bản,
 tương tự như cảnh giới binh khí (canh_gioi_binh_khi.py).
 """
 from typing import Optional, Dict, Any, List
 
-# Blueprint toàn bộ cảnh giới pháp bảo theo đúng thứ tự từ thấp đến cao (tương đồng binh khí)
+# Blueprint 5 cảnh giới pháp bảo theo đúng thứ tự từ thấp đến cao
 REALM_BLUEPRINT = [
     ("Pháp Bảo", [
-        ("Phàm Khí", (None,)),
-        ("Hoàng Khí", (None,)),
-        ("Thần Khí", (None,)),
-        ("Thiên Thần Khí", (None,)),
-        ("Chuẩn Thánh Khí", (None,)),
-        ("Thánh Khí", (None,)),
-        ("Chuẩn Chí Tôn Khí", (None,)),
-        ("Chí Tôn Khí", (None,)),
-        ("Chuẩn Đế Khí", (None,)),
-        ("Đế Khí", (None,)),
+        ("Thánh Bảo", (None,)),
+        ("Chí Tôn Bảo", (None,)),
+        ("Đế Bảo", (None,)),
         ("Văn Minh Chí Bảo", (None,)),
         ("Sơ Đại Văn Minh Chí Bảo", (None,)),
     ]),
@@ -56,19 +49,22 @@ TOTAL_REALMS: int = len(REALMS)
 REALM_BY_ID: Dict[int, Dict[str, Any]] = {r["id"]: r for r in REALMS}
 REALM_BY_NAME: Dict[str, Dict[str, Any]] = {r["name"]: r for r in REALMS}
 
-# Bổ sung alias tra cứu thuận tiện (cả tên đuôi "Khí" lẫn "Bảo", và alias Thành Đạo Khí / Đế Bảo)
+# Bổ sung alias tra cứu chữ thường và các tên gọi phổ biến
 for r in REALMS:
     name = r["name"]
-    # Nếu tên kết thúc bằng "Khí", thêm alias tương ứng kết thúc bằng "Bảo"
-    if name.endswith("Khí"):
-        bao_alias = name[:-3] + "Bảo"
-        REALM_BY_NAME.setdefault(bao_alias, r)
+    REALM_BY_NAME.setdefault(name.lower(), r)
+    REALM_BY_NAME.setdefault(name.title(), r)
 
-    if r["minor_realm"] == "Đế Khí":
-        REALM_BY_NAME["Thành Đạo Khí"] = r
-        REALM_BY_NAME["Đế Khí ( Thành Đạo Khí )"] = r
-        REALM_BY_NAME["Đế Khí (Thành Đạo Khí)"] = r
-        REALM_BY_NAME["Đế Bảo"] = r
+# Alias mở rộng cho Đế Bảo
+for r in REALMS:
+    if r["minor_realm"] == "Đế Bảo":
+        REALM_BY_NAME.setdefault("Đế Khí", r)
+        REALM_BY_NAME.setdefault("Thành Đạo Khí", r)
+        REALM_BY_NAME.setdefault("Đế Khí ( Thành Đạo Khí )", r)
+        REALM_BY_NAME.setdefault("Đế Khí (Thành Đạo Khí)", r)
+
+# Bảng tra cứu không phân biệt hoa thường
+REALM_BY_LOWER: Dict[str, Dict[str, Any]] = {k.lower(): v for k, v in REALM_BY_NAME.items()}
 
 # Alias ngữ nghĩa riêng cho pháp bảo
 PHAP_BAO_REALMS = REALMS
@@ -96,10 +92,14 @@ def get_realm_by_id(realm_id: int) -> Optional[Dict[str, Any]]:
 
 def get_realm_by_name(name: str) -> Optional[Dict[str, Any]]:
     """
-    Lấy thông tin cảnh giới pháp bảo theo tên đầy đủ hoặc alias.
+    Lấy thông tin cảnh giới pháp bảo theo tên đầy đủ hoặc alias (không phân biệt hoa thường).
     Trả về None nếu tên không tồn tại.
     """
-    return REALM_BY_NAME.get(name)
+    if not name:
+        return None
+    if name in REALM_BY_NAME:
+        return REALM_BY_NAME[name]
+    return REALM_BY_LOWER.get(name.strip().lower())
 
 
 def get_next_realm(realm_id: int) -> Optional[Dict[str, Any]]:
@@ -135,5 +135,5 @@ if __name__ == "__main__":
     print(f"Cấp cuối cùng (id={TOTAL_REALMS}): {get_realm_by_id(TOTAL_REALMS)}")
     print(f"Cảnh giới sau id=1: {get_next_realm(1)}")
     print(f"Cảnh giới sau id={TOTAL_REALMS}: {get_next_realm(TOTAL_REALMS)}")
-    print(f"Tra cứu qua alias 'Thánh Bảo': {get_realm_by_name('Thánh Bảo')}")
-    print(f"Tra cứu Đế Khí qua alias: {get_realm_by_name('Đế Khí')}")
+    print(f"Tra cứu 'Thánh bảo' (chữ thường): {get_realm_by_name('Thánh bảo')}")
+    print(f"Tra cứu 'Đế Bảo': {get_realm_by_name('Đế Bảo')}")
