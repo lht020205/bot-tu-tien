@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-canh_gioi.py
-=============
-Lưu trữ toàn bộ danh sách cảnh giới tu tiên của người chơi.
+canh_gioi_tu_vi.py
+==================
+Lưu trữ toàn bộ danh sách cảnh giới tu vi (tu tiên) của người chơi.
 File này thuần túy lưu trữ dữ liệu cảnh giới và các hàm tra cứu cơ bản,
 không chứa logic tính EXP hay tỷ lệ đột phá để các file khác (đột phá, hồ sơ...)
 dễ dàng tái sử dụng.
