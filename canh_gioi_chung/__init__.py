@@ -5,7 +5,7 @@ Package canh_gioi_chung
 Cung cấp toàn bộ hệ thống cảnh giới dùng chung cho bot tu tiên:
 1. Cảnh giới tu vi (canh_gioi_tu_vi)
 2. Cảnh giới pháp bảo (canh_gioi_phap_bao)
-3. Cảnh giới công pháp (canh_gioi_cong_phap)
+3. Cảnh giới phù triện (canh_gioi_phu_trien)
 4. Cảnh giới di tích (canh_gioi_di_tich)
 """
 
@@ -64,22 +64,37 @@ from .canh_gioi_phap_bao import (
     is_max_weapon_realm,
 )
 
-# Cảnh giới công pháp
-from .canh_gioi_cong_phap import (
-    REALMS as CONG_PHAP_REALMS,
+# Cảnh giới phù triện (thay thế công pháp)
+from .canh_gioi_phu_trien import (
+    REALMS as PHU_TRIEN_REALMS,
+    TALISMAN_REALMS,
+    TOTAL_REALMS as TOTAL_PHU_TRIEN_REALMS,
+    TOTAL_TALISMAN_REALMS,
+    get_all_realms as get_all_phu_trien_realms,
+    get_realm_by_id as get_phu_trien_realm_by_id,
+    get_realm_by_name as get_phu_trien_realm_by_name,
+    get_next_realm as get_next_phu_trien_realm,
+    is_max_realm as is_max_phu_trien_realm,
+    get_all_talisman_realms,
+    get_talisman_realm_by_id,
+    get_talisman_realm_by_name,
+    get_next_talisman_realm,
+    is_max_talisman_realm,
+    # Tương thích ngược với tên gọi công pháp
+    CONG_PHAP_REALMS,
     SKILL_REALMS,
-    TOTAL_REALMS as TOTAL_CONG_PHAP_REALMS,
-    TOTAL_CONG_PHAP_REALMS as TOTAL_SKILL_REALMS,
-    get_all_realms as get_all_cong_phap_realms,
-    get_realm_by_id as get_cong_phap_realm_by_id,
-    get_realm_by_name as get_cong_phap_realm_by_name,
-    get_next_realm as get_next_cong_phap_realm,
-    is_max_realm as is_max_cong_phap_realm,
-    get_all_cong_phap_realms as get_all_skill_realms,
-    get_cong_phap_realm_by_id as get_skill_realm_by_id,
-    get_cong_phap_realm_by_name as get_skill_realm_by_name,
-    get_next_cong_phap_realm as get_next_skill_realm,
-    is_max_cong_phap_realm as is_max_skill_realm,
+    TOTAL_CONG_PHAP_REALMS,
+    TOTAL_SKILL_REALMS,
+    get_all_cong_phap_realms,
+    get_cong_phap_realm_by_id,
+    get_cong_phap_realm_by_name,
+    get_next_cong_phap_realm,
+    is_max_cong_phap_realm,
+    get_all_skill_realms,
+    get_skill_realm_by_id,
+    get_skill_realm_by_name,
+    get_next_skill_realm,
+    is_max_skill_realm,
 )
 
 # Cảnh giới di tích
@@ -150,7 +165,22 @@ __all__ = [
     "get_weapon_realm_by_name",
     "get_next_weapon_realm",
     "is_max_weapon_realm",
-    # Công pháp
+    # Phù triện
+    "PHU_TRIEN_REALMS",
+    "TALISMAN_REALMS",
+    "TOTAL_PHU_TRIEN_REALMS",
+    "TOTAL_TALISMAN_REALMS",
+    "get_all_phu_trien_realms",
+    "get_phu_trien_realm_by_id",
+    "get_phu_trien_realm_by_name",
+    "get_next_phu_trien_realm",
+    "is_max_phu_trien_realm",
+    "get_all_talisman_realms",
+    "get_talisman_realm_by_id",
+    "get_talisman_realm_by_name",
+    "get_next_talisman_realm",
+    "is_max_talisman_realm",
+    # Công pháp (tương thích ngược)
     "CONG_PHAP_REALMS",
     "SKILL_REALMS",
     "TOTAL_CONG_PHAP_REALMS",
