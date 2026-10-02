@@ -85,7 +85,7 @@ async def create_hub_embed(user: discord.User, player: dict) -> discord.Embed:
     dashboard_text = (
         f"```yaml\n"
         f"【ĐẠO HIỆU】: {player['dao_hieu']}\n"
-        f"【CẢNH GIỚI】: {realm_info['name']} (Bậc {realm_id}/106)\n"
+        f"【CẢNH GIỚI】: {realm_info['name']} (Bậc {realm_id}/{cgc.TOTAL_TU_VI_REALMS})\n"
         f"【ĐẠI CẢNH】: {realm_info.get('major_realm', 'Vô Biên')}\n"
         f"```\n"
         f"**📊 TRẠNG THÁI KHÍ TỨC**\n"
@@ -469,7 +469,7 @@ class MenuCog(commands.Cog, name="Menu Tu Tiên"):
             embed.set_thumbnail(url=user.display_avatar.url)
             embed.add_field(
                 name="🎁 Cơ Duyên Nhập Môn",
-                value="• Cảnh giới ban đầu: **Ngưng Khí Tầng 1**\n• Ngân lượng khởi nghiệp: **100 Linh Thạch**\n• Mở khóa trọn bộ 106 cảnh giới Tiên Nghịch",
+                value=f"• Cảnh giới ban đầu: **Ngưng Khí Kỳ - Sơ Kỳ**\n• Ngân lượng khởi nghiệp: **100 Linh Thạch**\n• Mở khóa trọn bộ {cgc.TOTAL_TU_VI_REALMS} cảnh giới Tiên Nghịch",
                 inline=False
             )
             embed.set_footer(text="Nhấn nút 'Khai Mở Tiên Lộ' để bắt đầu ngay!")
