@@ -6,7 +6,7 @@ Cung cấp toàn bộ hệ thống cảnh giới dùng chung cho bot tu tiên:
 1. Cảnh giới tu vi (canh_gioi_tu_vi)
 2. Cảnh giới pháp bảo (canh_gioi_phap_bao)
 3. Cảnh giới phù triện (canh_gioi_phu_trien)
-4. Cảnh giới di tích (canh_gioi_di_tich)
+4. Cảnh giới đan dược (canh_gioi_dan_duoc)
 """
 
 # Cảnh giới tu vi (Mặc định cho các hàm không tiền tố để tương thích)
@@ -97,18 +97,34 @@ from .canh_gioi_phu_trien import (
     is_max_skill_realm,
 )
 
-# Cảnh giới di tích
-from .canh_gioi_di_tich import (
-    REALMS as DI_TICH_REALMS,
+# Cảnh giới đan dược (thay thế di tích)
+from .canh_gioi_dan_duoc import (
+    REALMS as DAN_DUOC_REALMS,
+    PILL_REALMS,
+    ELIXIR_REALMS,
+    TOTAL_REALMS as TOTAL_DAN_DUOC_REALMS,
+    TOTAL_DAN_DUOC_REALMS as TOTAL_PILL_REALMS,
+    get_all_realms as get_all_dan_duoc_realms,
+    get_realm_by_id as get_dan_duoc_realm_by_id,
+    get_realm_by_name as get_dan_duoc_realm_by_name,
+    get_next_realm as get_next_dan_duoc_realm,
+    is_max_realm as is_max_dan_duoc_realm,
+    get_all_pill_realms,
+    get_pill_realm_by_id,
+    get_pill_realm_by_name,
+    get_next_pill_realm,
+    is_max_pill_realm,
+    # Tương thích ngược với tên gọi di tích
+    DI_TICH_REALMS,
     RELIC_REALMS,
     RUINS_REALMS,
-    TOTAL_REALMS as TOTAL_DI_TICH_REALMS,
-    TOTAL_DI_TICH_REALMS as TOTAL_RELIC_REALMS,
-    get_all_realms as get_all_di_tich_realms,
-    get_realm_by_id as get_di_tich_realm_by_id,
-    get_realm_by_name as get_di_tich_realm_by_name,
-    get_next_realm as get_next_di_tich_realm,
-    is_max_realm as is_max_di_tich_realm,
+    TOTAL_DI_TICH_REALMS,
+    TOTAL_RELIC_REALMS,
+    get_all_di_tich_realms,
+    get_di_tich_realm_by_id,
+    get_di_tich_realm_by_name,
+    get_next_di_tich_realm,
+    is_max_di_tich_realm,
     get_all_relic_realms,
     get_relic_realm_by_id,
     get_relic_realm_by_name,
@@ -195,7 +211,23 @@ __all__ = [
     "get_skill_realm_by_name",
     "get_next_skill_realm",
     "is_max_skill_realm",
-    # Di tích
+    # Đan dược
+    "DAN_DUOC_REALMS",
+    "PILL_REALMS",
+    "ELIXIR_REALMS",
+    "TOTAL_DAN_DUOC_REALMS",
+    "TOTAL_PILL_REALMS",
+    "get_all_dan_duoc_realms",
+    "get_dan_duoc_realm_by_id",
+    "get_dan_duoc_realm_by_name",
+    "get_next_dan_duoc_realm",
+    "is_max_dan_duoc_realm",
+    "get_all_pill_realms",
+    "get_pill_realm_by_id",
+    "get_pill_realm_by_name",
+    "get_next_pill_realm",
+    "is_max_pill_realm",
+    # Di tích (tương thích ngược)
     "DI_TICH_REALMS",
     "RELIC_REALMS",
     "RUINS_REALMS",
