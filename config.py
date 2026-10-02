@@ -64,7 +64,8 @@ EMOJI_MAP = "🗺️"
 # CÔNG THỨC TU VI & ĐỘT PHÁ (TỰ ĐỘNG THÍCH ỨNG THEO HỆ THỐNG CẢNH GIỚI)
 # =============================================================================
 
-import canh_gioi_chung as cgc
+from phan_dau import canh_gioi_chung as cgc
+from phan_dau import dan_duoc
 
 def get_required_exp(realm_id: int) -> int:
     """Tính lượng EXP cần thiết để Đột Phá tại cảnh giới hiện tại."""
@@ -87,24 +88,24 @@ def get_required_exp(realm_id: int) -> int:
         return 25000 + (realm_id - 12) * 12000
     elif "Hóa Thần" in minor:
         return 80000 + (realm_id - 16) * 35000
-    elif "Ý Cảnh" in minor:
-        return 250000 + (realm_id - 20) * 100000
     elif "Anh Biến" in minor:
-        return 600000 + (realm_id - 23) * 250000
+        return 600000 + (realm_id - 20) * 250000
     elif "Vấn Đỉnh" in minor:
-        return 1600000 + (realm_id - 27) * 500000
+        return 1600000 + (realm_id - 24) * 500000
     elif "Âm Hư" in minor or "Dương Thực" in minor:
-        return 3500000 + (realm_id - 31) * 1000000
+        return 3500000 + (realm_id - 28) * 350000
     elif "Nhị Bộ" in major:
-        return 6000000 + (realm_id - 33) * 2000000
+        return 6000000 + (realm_id - 36) * 2000000
     elif "Tam Bộ" in major:
-        return 40000000 + (realm_id - 50) * 8000000
-    else:  # Tứ Bộ
-        return 300000000 + (realm_id - 90) * 150000000
+        return 40000000 + (realm_id - 48) * 8000000
+    elif "Tứ Bộ" in major:
+        return 300000000 + (realm_id - 64) * 150000000
+    else:  # Ngũ Bộ Cảnh
+        return 2000000000 + (realm_id - 76) * 500000000
 
 
 def get_breakthrough_rate(realm_id: int) -> float:
-    """Tính tỷ lệ đột phá cơ bản (từ 0.05 đến 0.90)."""
+    """Tính tỷ lệ đột phá cơ bản (từ 0.03 đến 0.90)."""
     realm_info = cgc.get_tu_vi_realm_by_id(realm_id)
     if not realm_info or cgc.is_max_tu_vi_realm(realm_id):
         return 0.0
@@ -122,20 +123,18 @@ def get_breakthrough_rate(realm_id: int) -> float:
         return 0.55
     elif "Hóa Thần" in minor:
         return 0.45
-    elif "Ý Cảnh" in minor:
-        return 0.40
     elif "Anh Biến" in minor:
         return 0.35
     elif "Vấn Đỉnh" in minor or "Âm Hư" in minor or "Dương Thực" in minor:
         return 0.30
     elif "Nhị Bộ" in major:
         return 0.25
-    elif "Huyền Kiếp" in minor:
-        return 0.15
     elif "Tam Bộ" in major:
-        return 0.12
-    else:  # Tứ Bộ
-        return 0.05
+        return 0.15
+    elif "Tứ Bộ" in major:
+        return 0.08
+    else:  # Ngũ Bộ Cảnh
+        return 0.03
 
 
 def get_cultivate_reward(realm_id: int) -> tuple[int, int]:

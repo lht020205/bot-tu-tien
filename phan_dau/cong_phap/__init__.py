@@ -1,0 +1,123 @@
+# -*- coding: utf-8 -*-
+"""
+Package cong_phap
+=================
+Chứa hệ thống Công Pháp, Thần Thông và Thân Pháp trong Chu Thiên Vạn Giới:
+1. cong_phap: Công Pháp Chủ Tu (Nội Công / Passive Engine) - Định hình hệ linh lực, buff thụ động, giới hạn cảnh giới.
+2. than_thong: Thần Thông / Pháp Thuật (Ngoại Công / Active Skills) - 4 nhóm: Đơn thể, AoE, Khống chế, Buff/Khiên.
+3. than_phap: Thân Pháp / Độn Thuật (Movement / Evasion) - Tiên thủ xuất chiêu, Né tránh (Miss), Độn tẩu (Escape) qua 4 giai đoạn tiến hóa.
+"""
+from .cong_phap import (
+    HE_MOC,
+    HE_HOA,
+    HE_BANG,
+    HE_LOI,
+    HE_AM,
+    HE_HUYET,
+    HE_KIEM,
+    HE_THE_MA,
+    HE_HON_DON,
+    CONG_HUONG_HE_BONUS,
+    CONG_PHAP_DATA,
+    CONG_PHAP_BY_ID,
+    CONG_PHAP_BY_KEY,
+    get_all_cong_phap,
+    get_cong_phap_by_id,
+    get_cong_phap_by_key,
+    get_cong_phap_by_element,
+    tinh_sat_thuong_cong_huong,
+    kiem_tra_gioi_han_canh_gioi,
+)
+
+from .than_thong import (
+    CAT_DON_THE,
+    CAT_QUAN_THE,
+    CAT_KHONG_CHE,
+    CAT_BO_TRO,
+    THAN_THONG_CATEGORIES,
+    THAN_THONG_DATA,
+    THAN_THONG_BY_ID,
+    THAN_THONG_BY_KEY,
+    THAN_THONG_BY_CAT,
+    get_all_than_thong,
+    get_than_thong_by_id,
+    get_than_thong_by_key,
+    get_than_thong_by_category,
+    kiem_tra_tieu_hao_thi_trien,
+    tinh_ty_le_khong_che_thanh_cong,
+)
+
+from .than_phap import (
+    STAGE_BO_PHAP,
+    STAGE_DON_THUAT,
+    STAGE_KHONG_GIAN,
+    STAGE_THUAN_DI,
+    STAGES_MAP,
+    THAN_PHAP_DATA,
+    THAN_PHAP_BY_ID,
+    THAN_PHAP_BY_KEY,
+    THAN_PHAP_BY_STAGE,
+    get_all_than_phap,
+    get_than_phap_by_id,
+    get_than_phap_by_key,
+    get_than_phap_by_stage,
+    tinh_thu_tu_xuat_chieu,
+    tinh_ty_le_ne_tranh,
+    tinh_ty_le_don_tau,
+)
+
+__all__ = [
+    # cong_phap
+    "HE_MOC",
+    "HE_HOA",
+    "HE_BANG",
+    "HE_LOI",
+    "HE_AM",
+    "HE_HUYET",
+    "HE_KIEM",
+    "HE_THE_MA",
+    "HE_HON_DON",
+    "CONG_HUONG_HE_BONUS",
+    "CONG_PHAP_DATA",
+    "CONG_PHAP_BY_ID",
+    "CONG_PHAP_BY_KEY",
+    "get_all_cong_phap",
+    "get_cong_phap_by_id",
+    "get_cong_phap_by_key",
+    "get_cong_phap_by_element",
+    "tinh_sat_thuong_cong_huong",
+    "kiem_tra_gioi_han_canh_gioi",
+    # than_thong
+    "CAT_DON_THE",
+    "CAT_QUAN_THE",
+    "CAT_KHONG_CHE",
+    "CAT_BO_TRO",
+    "THAN_THONG_CATEGORIES",
+    "THAN_THONG_DATA",
+    "THAN_THONG_BY_ID",
+    "THAN_THONG_BY_KEY",
+    "THAN_THONG_BY_CAT",
+    "get_all_than_thong",
+    "get_than_thong_by_id",
+    "get_than_thong_by_key",
+    "get_than_thong_by_category",
+    "kiem_tra_tieu_hao_thi_trien",
+    "tinh_ty_le_khong_che_thanh_cong",
+    # than_phap
+    "STAGE_BO_PHAP",
+    "STAGE_DON_THUAT",
+    "STAGE_KHONG_GIAN",
+    "STAGE_THUAN_DI",
+    "STAGES_MAP",
+    "THAN_PHAP_DATA",
+    "THAN_PHAP_BY_ID",
+    "THAN_PHAP_BY_KEY",
+    "THAN_PHAP_BY_STAGE",
+    "get_all_than_phap",
+    "get_than_phap_by_id",
+    "get_than_phap_by_key",
+    "get_than_phap_by_stage",
+    "tinh_thu_tu_xuat_chieu",
+    "tinh_ty_le_ne_tranh",
+    "tinh_ty_le_don_tau",
+]

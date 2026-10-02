@@ -66,13 +66,35 @@ python bot.py
 
 ```
 bot-tu-tien/
-├── canh_gioi_chung/           # Thư viện hệ thống cảnh giới chuẩn Tiên Nghịch
-│   ├── canh_gioi_tu_vi.py     # 106 bậc tu vi
-│   ├── canh_gioi_phap_bao.py  # 13 bậc pháp bảo
-│   ├── canh_gioi_dan_duoc.py  # 92 cấp đan dược
-│   ├── canh_gioi_phu_trien.py # 8 bậc phù triện
-│   ├── canh_gioi_linh_thu.py  # 9 cấp linh thú
-│   └── __init__.py
+├── phan_dau/                  # Thư viện hệ thống cơ sở (Phần Đầu)
+│   ├── canh_gioi_chung/       # Thư viện hệ thống cảnh giới chuẩn Tiên Nghịch
+│   │   ├── canh_gioi_tu_vi.py     # 83 bậc tu vi (từ Ngưng Khí đến Vô Cảnh)
+│   │   ├── canh_gioi_phap_bao.py  # 13 bậc pháp bảo
+│   │   ├── canh_gioi_dan_duoc.py  # Phẩm cấp đan dược (Phàm, Linh, Tiên Đan)
+│   │   ├── canh_gioi_phu_trien.py # 8 bậc phù triện
+│   │   ├── canh_gioi_linh_thu.py  # 9 cấp linh thú
+│   │   └── __init__.py
+│   ├── dan_duoc/              # Danh mục 56 loại đan dược trong thế giới Tu Tiên
+│   │   ├── tat_ca_dan_duoc.py     # Dữ liệu & hàm tra cứu đan dược
+│   │   ├── tat_ca_dan_duoc.md     # Tài liệu tra cứu chi tiết
+│   │   ├── tat_ca_dan_duoc.json   # Dữ liệu JSON chuẩn hóa
+│   │   └── __init__.py
+│   ├── nguoi_tu_tien/         # Hệ thống định hình bản thể & thuộc tính người tu tiên
+│   │   ├── toc.py                 # 8 Chủng Tộc (Chính Đạo & Ma Đạo)
+│   │   ├── linh_can.py            # 10 Linh Căn (Chính Đạo & Ma Đạo)
+│   │   ├── tui_tru_vat.py         # Quản lý túi trữ vật & phân loại đồ
+│   │   ├── chi_so.py              # 14 Chỉ số (Cơ bản, Chiến đấu, Ẩn)
+│   │   └── __init__.py
+│   ├── tai_nguyen/            # Hệ thống tiền tệ & tài nguyên tu tiên
+│   │   ├── linh_thach.py          # Tiền tệ cơ bản (Hạ - Trung - Thượng - Cực phẩm)
+│   │   ├── tien_thach.py          # Tiền tệ cao cấp (từ Vấn Đỉnh / Nhị Bộ Cảnh)
+│   │   ├── diem_cong_hien.py      # Điểm cống hiến Tông Môn đổi công pháp & vật phẩm
+│   │   └── __init__.py
+│   └── cong_phap/             # Hệ thống Công Pháp, Thần Thông & Thân Pháp
+│       ├── cong_phap.py           # Công Pháp Chủ Tu (Passive Engine & Cộng hưởng hệ)
+│       ├── than_thong.py          # Thần Thông (Active Skills: Đơn thể, AoE, CC, Shield)
+│       ├── than_phap.py           # Thân Pháp & Độn Thuật (Tiên thủ, Né tránh, Escape)
+│       └── __init__.py
 ├── cogs/
 │   ├── tu_tien.py             # Lệnh cốt lõi (/khoi_dau, /ho_so, /tu_luyen, /dot_pha, /bang_xep_hang)
 │   ├── tra_cuu.py             # Lệnh tra cứu từ điển (/tra_cuu)

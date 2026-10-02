@@ -16,7 +16,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-import canh_gioi_chung as cgc
+from phan_dau import canh_gioi_chung as cgc
 import database as db
 import config
 
