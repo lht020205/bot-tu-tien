@@ -8,6 +8,7 @@ Cung cấp toàn bộ hệ thống cảnh giới dùng chung cho bot tu tiên:
 3. Cảnh giới pháp bảo (canh_gioi_phap_bao)
 4. Cảnh giới công pháp (canh_gioi_cong_phap)
 5. Cảnh giới đan dược (canh_gioi_dan_duoc)
+6. Cảnh giới di tích (canh_gioi_di_tich)
 """
 
 # Cảnh giới tu vi (Mặc định cho các hàm không tiền tố để tương thích)
@@ -93,16 +94,35 @@ from .canh_gioi_dan_duoc import (
     ELIXIR_REALMS,
     TOTAL_REALMS as TOTAL_DAN_DUOC_REALMS,
     TOTAL_DAN_DUOC_REALMS as TOTAL_PILL_REALMS,
-    get_all_realms as get_all_dan_duoc_realms,
-    get_realm_by_id as get_dan_duoc_realm_by_id,
-    get_realm_by_name as get_dan_duoc_realm_by_name,
-    get_next_realm as get_next_dan_duoc_realm,
-    is_max_realm as is_max_dan_duoc_realm,
-    get_all_dan_duoc_realms as get_all_pill_realms,
-    get_dan_duoc_realm_by_id as get_pill_realm_by_id,
-    get_dan_duoc_realm_by_name as get_pill_realm_by_name,
-    get_next_dan_duoc_realm as get_next_pill_realm,
-    is_max_dan_duoc_realm as is_max_pill_realm,
+    get_all_dan_duoc_realms,
+    get_dan_duoc_realm_by_id,
+    get_dan_duoc_realm_by_name,
+    get_next_dan_duoc_realm,
+    is_max_dan_duoc_realm,
+    get_all_pill_realms,
+    get_pill_realm_by_id,
+    get_pill_realm_by_name,
+    get_next_pill_realm,
+    is_max_pill_realm,
+)
+
+# Cảnh giới di tích
+from .canh_gioi_di_tich import (
+    REALMS as DI_TICH_REALMS,
+    RELIC_REALMS,
+    RUINS_REALMS,
+    TOTAL_REALMS as TOTAL_DI_TICH_REALMS,
+    TOTAL_DI_TICH_REALMS as TOTAL_RELIC_REALMS,
+    get_all_realms as get_all_di_tich_realms,
+    get_realm_by_id as get_di_tich_realm_by_id,
+    get_realm_by_name as get_di_tich_realm_by_name,
+    get_next_realm as get_next_di_tich_realm,
+    is_max_realm as is_max_di_tich_realm,
+    get_all_relic_realms,
+    get_relic_realm_by_id,
+    get_relic_realm_by_name,
+    get_next_relic_realm,
+    is_max_relic_realm,
 )
 
 __all__ = [
@@ -185,4 +205,20 @@ __all__ = [
     "get_pill_realm_by_name",
     "get_next_pill_realm",
     "is_max_pill_realm",
+    # Di tích
+    "DI_TICH_REALMS",
+    "RELIC_REALMS",
+    "RUINS_REALMS",
+    "TOTAL_DI_TICH_REALMS",
+    "TOTAL_RELIC_REALMS",
+    "get_all_di_tich_realms",
+    "get_di_tich_realm_by_id",
+    "get_di_tich_realm_by_name",
+    "get_next_di_tich_realm",
+    "is_max_di_tich_realm",
+    "get_all_relic_realms",
+    "get_relic_realm_by_id",
+    "get_relic_realm_by_name",
+    "get_next_relic_realm",
+    "is_max_relic_realm",
 ]
