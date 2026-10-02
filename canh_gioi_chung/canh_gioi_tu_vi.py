@@ -16,12 +16,6 @@ from typing import Optional, Dict, Any, List
 # Các bộ giai đoạn dùng chung
 STAGES_SO_TRUNG_HAU_VIEN_MAN = ("Sơ Kỳ", "Trung Kỳ", "Hậu Kỳ", "Viên Mãn")
 
-STAGES_NGUNG_KHI = (
-    "Tầng 1", "Tầng 2", "Tầng 3", "Tầng 4", "Tầng 5",
-    "Tầng 6", "Tầng 7", "Tầng 8", "Tầng 9", "Tầng 10",
-    "Tầng 11", "Tầng 12", "Tầng 13", "Tầng 14", "Tầng 15 (Viên Mãn)",
-)
-
 STAGES_Y_CANH = ("Tiểu Thành", "Đại Thành", "Viên Mãn")
 
 STAGES_THIEN_NHAN_NGU_SUY = (
@@ -53,7 +47,7 @@ REALM_BLUEPRINT = [
     # I - Nhất Bộ Cảnh ( Tung Hoành Cảnh )
     # -------------------------------------------------------------
     ("Nhất Bộ Cảnh ( Tung Hoành Cảnh )", [
-        ("Ngưng Khí Kỳ / Linh Động Kỳ", STAGES_NGUNG_KHI),
+        ("Ngưng Khí Kỳ / Linh Động Kỳ", STAGES_SO_TRUNG_HAU_VIEN_MAN),
         ("Trúc Cơ Kỳ", STAGES_SO_TRUNG_HAU_VIEN_MAN),
         ("Kết Đan Kỳ", STAGES_SO_TRUNG_HAU_VIEN_MAN),
         ("Nguyên Anh Kỳ", STAGES_SO_TRUNG_HAU_VIEN_MAN),
@@ -259,8 +253,8 @@ if __name__ == "__main__":
     print(f"Cảnh giới sau id=1: {get_next_realm(1)}")
     print(f"Cảnh giới sau id={TOTAL_REALMS}: {get_next_realm(TOTAL_REALMS)}")
     print("\n--- Test tra cứu linh hoạt ---")
-    print(f"Tra cứu 'ngưng khí kỳ - tầng 1': {get_realm_by_name('ngưng khí kỳ - tầng 1')}")
-    print(f"Tra cứu 'linh động kỳ - tầng 15 (viên mãn)': {get_realm_by_name('linh động kỳ - tầng 15 (viên mãn)')}")
+    print(f"Tra cứu 'ngưng khí kỳ - sơ kỳ': {get_realm_by_name('ngưng khí kỳ - sơ kỳ')}")
+    print(f"Tra cứu 'linh động kỳ - viên mãn': {get_realm_by_name('linh động kỳ - viên mãn')}")
     print(f"Tra cứu 'âm hư cảnh': {get_realm_by_name('âm hư cảnh')}")
     print(f"Tra cứu 'đệ nhất suy': {get_realm_by_name('đệ nhất suy')}")
     print(f"Tra cứu 'tuyết kiếp': {get_realm_by_name('tuyết kiếp')}")
