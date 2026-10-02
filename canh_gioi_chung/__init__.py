@@ -4,7 +4,7 @@ Package canh_gioi_chung
 =======================
 Cung cấp toàn bộ hệ thống cảnh giới dùng chung cho bot tu tiên:
 1. Cảnh giới tu vi (canh_gioi_tu_vi)
-2. Cảnh giới binh khí (canh_gioi_binh_khi)
+2. Cảnh giới pháp bảo (canh_gioi_phap_bao)
 3. Cảnh giới công pháp (canh_gioi_cong_phap)
 4. Cảnh giới di tích (canh_gioi_di_tich)
 """
@@ -31,17 +31,32 @@ from .canh_gioi_tu_vi import (
     is_max_realm as is_max_tu_vi_realm,
 )
 
-# Cảnh giới binh khí
-from .canh_gioi_binh_khi import (
-    REALMS as BINH_KHI_REALMS,
+# Cảnh giới pháp bảo (thay thế binh khí)
+from .canh_gioi_phap_bao import (
+    REALMS as PHAP_BAO_REALMS,
+    TREASURE_REALMS,
+    TOTAL_REALMS as TOTAL_PHAP_BAO_REALMS,
+    TOTAL_TREASURE_REALMS,
+    get_all_realms as get_all_phap_bao_realms,
+    get_realm_by_id as get_phap_bao_realm_by_id,
+    get_realm_by_name as get_phap_bao_realm_by_name,
+    get_next_realm as get_next_phap_bao_realm,
+    is_max_realm as is_max_phap_bao_realm,
+    get_all_treasure_realms,
+    get_treasure_realm_by_id,
+    get_treasure_realm_by_name,
+    get_next_treasure_realm,
+    is_max_treasure_realm,
+    # Tương thích ngược với tên gọi binh khí
+    BINH_KHI_REALMS,
     WEAPON_REALMS,
-    TOTAL_REALMS as TOTAL_BINH_KHI_REALMS,
+    TOTAL_BINH_KHI_REALMS,
     TOTAL_WEAPON_REALMS,
-    get_all_realms as get_all_binh_khi_realms,
-    get_realm_by_id as get_binh_khi_realm_by_id,
-    get_realm_by_name as get_binh_khi_realm_by_name,
-    get_next_realm as get_next_binh_khi_realm,
-    is_max_realm as is_max_binh_khi_realm,
+    get_all_binh_khi_realms,
+    get_binh_khi_realm_by_id,
+    get_binh_khi_realm_by_name,
+    get_next_binh_khi_realm,
+    is_max_binh_khi_realm,
     get_all_weapon_realms,
     get_weapon_realm_by_id,
     get_weapon_realm_by_name,
@@ -105,7 +120,22 @@ __all__ = [
     "get_tu_vi_realm_by_name",
     "get_next_tu_vi_realm",
     "is_max_tu_vi_realm",
-    # Binh khí
+    # Pháp bảo
+    "PHAP_BAO_REALMS",
+    "TREASURE_REALMS",
+    "TOTAL_PHAP_BAO_REALMS",
+    "TOTAL_TREASURE_REALMS",
+    "get_all_phap_bao_realms",
+    "get_phap_bao_realm_by_id",
+    "get_phap_bao_realm_by_name",
+    "get_next_phap_bao_realm",
+    "is_max_phap_bao_realm",
+    "get_all_treasure_realms",
+    "get_treasure_realm_by_id",
+    "get_treasure_realm_by_name",
+    "get_next_treasure_realm",
+    "is_max_treasure_realm",
+    # Binh khí (tương thích ngược)
     "BINH_KHI_REALMS",
     "WEAPON_REALMS",
     "TOTAL_BINH_KHI_REALMS",
