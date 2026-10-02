@@ -7,6 +7,7 @@ Cung cấp toàn bộ hệ thống cảnh giới dùng chung cho bot tu tiên:
 2. Cảnh giới pháp bảo (canh_gioi_phap_bao)
 3. Cảnh giới phù triện (canh_gioi_phu_trien)
 4. Cảnh giới đan dược (canh_gioi_dan_duoc)
+5. Cảnh giới linh thú (canh_gioi_linh_thu)
 """
 
 # Cảnh giới tu vi (Mặc định cho các hàm không tiền tố để tương thích)
@@ -104,11 +105,11 @@ from .canh_gioi_dan_duoc import (
     ELIXIR_REALMS,
     TOTAL_REALMS as TOTAL_DAN_DUOC_REALMS,
     TOTAL_DAN_DUOC_REALMS as TOTAL_PILL_REALMS,
-    get_all_realms as get_all_dan_duoc_realms,
-    get_realm_by_id as get_dan_duoc_realm_by_id,
-    get_realm_by_name as get_dan_duoc_realm_by_name,
-    get_next_realm as get_next_dan_duoc_realm,
-    is_max_realm as is_max_dan_duoc_realm,
+    get_all_dan_duoc_realms,
+    get_dan_duoc_realm_by_id,
+    get_dan_duoc_realm_by_name,
+    get_next_dan_duoc_realm,
+    is_max_dan_duoc_realm,
     get_all_pill_realms,
     get_pill_realm_by_id,
     get_pill_realm_by_name,
@@ -130,6 +131,31 @@ from .canh_gioi_dan_duoc import (
     get_relic_realm_by_name,
     get_next_relic_realm,
     is_max_relic_realm,
+)
+
+# Cảnh giới linh thú
+from .canh_gioi_linh_thu import (
+    REALMS as LINH_THU_REALMS,
+    BEAST_REALMS,
+    PET_REALMS,
+    TOTAL_REALMS as TOTAL_LINH_THU_REALMS,
+    TOTAL_LINH_THU_REALMS as TOTAL_BEAST_REALMS,
+    TOTAL_BEAST_REALMS as TOTAL_PET_REALMS,
+    get_all_realms as get_all_linh_thu_realms,
+    get_realm_by_id as get_linh_thu_realm_by_id,
+    get_realm_by_name as get_linh_thu_realm_by_name,
+    get_next_realm as get_next_linh_thu_realm,
+    is_max_realm as is_max_linh_thu_realm,
+    get_all_beast_realms,
+    get_beast_realm_by_id,
+    get_beast_realm_by_name,
+    get_next_beast_realm,
+    is_max_beast_realm,
+    get_all_pet_realms,
+    get_pet_realm_by_id,
+    get_pet_realm_by_name,
+    get_next_pet_realm,
+    is_max_pet_realm,
 )
 
 __all__ = [
@@ -243,4 +269,26 @@ __all__ = [
     "get_relic_realm_by_name",
     "get_next_relic_realm",
     "is_max_relic_realm",
+    # Linh thú
+    "LINH_THU_REALMS",
+    "BEAST_REALMS",
+    "PET_REALMS",
+    "TOTAL_LINH_THU_REALMS",
+    "TOTAL_BEAST_REALMS",
+    "TOTAL_PET_REALMS",
+    "get_all_linh_thu_realms",
+    "get_linh_thu_realm_by_id",
+    "get_linh_thu_realm_by_name",
+    "get_next_linh_thu_realm",
+    "is_max_linh_thu_realm",
+    "get_all_beast_realms",
+    "get_beast_realm_by_id",
+    "get_beast_realm_by_name",
+    "get_next_beast_realm",
+    "is_max_beast_realm",
+    "get_all_pet_realms",
+    "get_pet_realm_by_id",
+    "get_pet_realm_by_name",
+    "get_next_pet_realm",
+    "is_max_pet_realm",
 ]
