@@ -2,13 +2,13 @@
 """
 canh_gioi_di_tich.py
 ====================
-Lưu trữ danh sách 6 cảnh giới (bậc) di tích trong hệ thống.
+Lưu trữ danh sách 9 cảnh giới (bậc) di tích trong hệ thống.
 File này thuần túy lưu trữ dữ liệu cảnh giới và các hàm tra cứu cơ bản,
 tương tự như các hệ thống cảnh giới khác trong canh_gioi_chung.
 """
 from typing import Optional, Dict, Any, List
 
-# Blueprint 6 bậc di tích theo đúng thứ tự từ thấp đến cao
+# Blueprint 9 bậc di tích theo đúng thứ tự từ thấp đến cao (tương đồng 9 đại cảnh giới tu vi)
 REALM_BLUEPRINT = [
     ("Di Tích", [
         ("Phàm", (None,)),
@@ -16,7 +16,10 @@ REALM_BLUEPRINT = [
         ("Thánh", (None,)),
         ("Chí Tôn", (None,)),
         ("Đế", (None,)),
-        ("Văn Minh", (None,)),
+        ("Tiên", (None,)),
+        ("Đạo", (None,)),
+        ("Đạo Tổ", (None,)),
+        ("Thiên", (None,)),
     ]),
 ]
 
@@ -133,5 +136,5 @@ if __name__ == "__main__":
     print(f"Bậc sau id=1: {get_next_realm(1)}")
     print(f"Bậc sau id={TOTAL_REALMS}: {get_next_realm(TOTAL_REALMS)}")
     print(f"Tra cứu 'phàm' (chữ thường): {get_realm_by_name('phàm')}")
-    print(f"Tra cứu 'Thần Cấp' qua alias: {get_realm_by_name('Thần Cấp')}")
-    print(f"Tra cứu 'di tích văn minh': {get_realm_by_name('di tích văn minh')}")
+    print(f"Tra cứu 'Tiên Cấp' qua alias: {get_realm_by_name('Tiên Cấp')}")
+    print(f"Tra cứu 'di tích đạo tổ': {get_realm_by_name('di tích đạo tổ')}")
