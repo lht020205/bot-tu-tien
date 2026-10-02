@@ -7,6 +7,7 @@ Cung cấp toàn bộ hệ thống cảnh giới dùng chung cho bot tu tiên:
 2. Cảnh giới binh khí (canh_gioi_binh_khi)
 3. Cảnh giới pháp bảo (canh_gioi_phap_bao)
 4. Cảnh giới công pháp (canh_gioi_cong_phap)
+5. Cảnh giới đan dược (canh_gioi_dan_duoc)
 """
 
 # Cảnh giới tu vi (Mặc định cho các hàm không tiền tố để tương thích)
@@ -85,6 +86,25 @@ from .canh_gioi_cong_phap import (
     is_max_cong_phap_realm as is_max_skill_realm,
 )
 
+# Cảnh giới đan dược
+from .canh_gioi_dan_duoc import (
+    REALMS as DAN_DUOC_REALMS,
+    PILL_REALMS,
+    ELIXIR_REALMS,
+    TOTAL_REALMS as TOTAL_DAN_DUOC_REALMS,
+    TOTAL_DAN_DUOC_REALMS as TOTAL_PILL_REALMS,
+    get_all_realms as get_all_dan_duoc_realms,
+    get_realm_by_id as get_dan_duoc_realm_by_id,
+    get_realm_by_name as get_dan_duoc_realm_by_name,
+    get_next_realm as get_next_dan_duoc_realm,
+    is_max_realm as is_max_dan_duoc_realm,
+    get_all_dan_duoc_realms as get_all_pill_realms,
+    get_dan_duoc_realm_by_id as get_pill_realm_by_id,
+    get_dan_duoc_realm_by_name as get_pill_realm_by_name,
+    get_next_dan_duoc_realm as get_next_pill_realm,
+    is_max_dan_duoc_realm as is_max_pill_realm,
+)
+
 __all__ = [
     # Tu vi
     "REALMS",
@@ -149,4 +169,20 @@ __all__ = [
     "get_skill_realm_by_name",
     "get_next_skill_realm",
     "is_max_skill_realm",
+    # Đan dược
+    "DAN_DUOC_REALMS",
+    "PILL_REALMS",
+    "ELIXIR_REALMS",
+    "TOTAL_DAN_DUOC_REALMS",
+    "TOTAL_PILL_REALMS",
+    "get_all_dan_duoc_realms",
+    "get_dan_duoc_realm_by_id",
+    "get_dan_duoc_realm_by_name",
+    "get_next_dan_duoc_realm",
+    "is_max_dan_duoc_realm",
+    "get_all_pill_realms",
+    "get_pill_realm_by_id",
+    "get_pill_realm_by_name",
+    "get_next_pill_realm",
+    "is_max_pill_realm",
 ]
